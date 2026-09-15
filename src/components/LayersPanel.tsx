@@ -6,7 +6,7 @@ interface LayersPanelProps {
 }
 
 export function LayersPanel({ studio }: LayersPanelProps) {
-  const { selectedLayer, setSelectedLayer } = studio;
+  const { selectedLayer, selectLayer } = studio;
 
   return (
     <div className="studio-layers">
@@ -15,7 +15,7 @@ export function LayersPanel({ studio }: LayersPanelProps) {
           key={layer.key}
           className={`studio-layer-row${layer.key === selectedLayer ? ' selected' : ''}`}
           style={{ paddingLeft: 8 + layer.depth * 13 }}
-          onClick={() => setSelectedLayer(layer.key)}
+          onClick={() => selectLayer(layer.key)}
         >
           <i className={layer.icon} />
           <span className="studio-layer-label">{layer.label}</span>

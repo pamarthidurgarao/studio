@@ -35,10 +35,11 @@ export function PropertiesPanel({ studio }: PropertiesPanelProps) {
     pad,
     setPadSide,
     cssOut,
+    panelOpen,
   } = studio;
 
   return (
-    <div className="studio-properties">
+    <div className={`studio-properties${panelOpen ? ' open' : ''}`}>
       <div className="studio-properties-head">
         <div style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
           <i className="pi pi-th-large" style={{ color: 'var(--color-accent)' }} />

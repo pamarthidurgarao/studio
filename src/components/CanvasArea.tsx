@@ -25,16 +25,21 @@ export function CanvasArea({ studio }: CanvasAreaProps) {
         <span style={{ color: 'var(--color-accent)' }}>
           <i className="pi pi-directions" />
         </span>
-        <span>{crumb}</span>
-        <span style={{ marginLeft: 'auto', fontVariantNumeric: 'tabular-nums' }}>{viewportLabel}</span>
+        <span className="studio-canvas-crumb">{crumb}</span>
+        <span
+          className="studio-viewport-label"
+          style={{ marginLeft: 'auto', fontVariantNumeric: 'tabular-nums' }}
+        >
+          {viewportLabel}
+        </span>
         <button
           type="button"
           className={`studio-chip${drag ? ' active' : ''}`}
-          style={{ fontSize: '10.5px', padding: '5px 8px' }}
+          style={{ fontSize: '10.5px', padding: '5px 8px', flex: 'none' }}
           onClick={() => setDrag(!drag)}
         >
           <i className="pi pi-arrows-alt" style={{ fontSize: 12 }} />
-          simulate drag
+          <span className="studio-drag-label">simulate drag</span>
         </button>
       </div>
 

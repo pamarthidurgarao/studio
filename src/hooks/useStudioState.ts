@@ -34,6 +34,8 @@ export function useStudioState() {
   const [gap, setGap] = useState(16);
   const [pad, setPad] = useState<Padding>({ top: 24, right: 32, bottom: 24, left: 32 });
   const [search, setSearch] = useState('');
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [panelOpen, setPanelOpen] = useState(false);
 
   const breakpoints = useMemo(
     () => BREAKPOINTS.map((b) => ({ ...b, active: b.key === bp })),
@@ -103,6 +105,17 @@ export function useStudioState() {
   const setPadSide = (side: keyof Padding, value: number) =>
     setPad((p) => ({ ...p, [side]: Number.isFinite(value) ? value : p[side] }));
 
+  const toggleSidebar = () => setSidebarOpen((v) => !v);
+  const togglePanel = () => setPanelOpen((v) => !v);
+  const closeDrawers = () => {
+    setSidebarOpen(false);
+    setPanelOpen(false);
+  };
+  const selectLayer = (key: string) => {
+    setSelectedLayer(key);
+    setSidebarOpen(false);
+  };
+
   return {
     tab,
     setTab,
@@ -124,6 +137,12 @@ export function useStudioState() {
     setPadSide,
     search,
     setSearch,
+    sidebarOpen,
+    panelOpen,
+    toggleSidebar,
+    togglePanel,
+    closeDrawers,
+    selectLayer,
     breakpoints,
     viewportLabel,
     bpName,

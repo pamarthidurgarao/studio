@@ -15,10 +15,10 @@ interface SidebarProps {
 }
 
 export function Sidebar({ studio }: SidebarProps) {
-  const { tab, setTab } = studio;
+  const { tab, setTab, sidebarOpen } = studio;
 
   return (
-    <div className="studio-sidebar">
+    <div className={`studio-sidebar${sidebarOpen ? ' open' : ''}`}>
       <div className="studio-tabs">
         {TABS.map((t) => (
           <button
