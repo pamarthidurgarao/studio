@@ -1,5 +1,5 @@
 export type Breakpoint = 'desktop' | 'tablet' | 'mobile';
-export type SidebarTab = 'blocks' | 'layers' | 'tokens';
+export type SidebarTab = 'pages' | 'blocks' | 'layers';
 export type LayoutMode = 'grid' | 'flex' | 'rows' | 'absolute';
 
 export interface Padding {

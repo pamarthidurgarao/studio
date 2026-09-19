@@ -1,0 +1,317 @@
+.df-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+}
+
+.df-title {
+  margin: 0;
+  font-weight: 600;
+}
+
+.df-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.df-section-plain,
+.df-section-panel {
+  width: 100%;
+}
+
+.df-section-description {
+  margin: 0 0 0.75rem;
+  color: var(--color-neutral-500);
+  font-size: 0.85em;
+}
+
+.df-section-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.df-section-divider {
+  border: none;
+  border-top: 1px solid var(--color-divider);
+  margin: 0 0 1rem;
+}
+
+.df-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  min-width: 0;
+}
+
+.df-field-label {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.85em;
+  font-weight: 500;
+  color: var(--color-neutral-300, inherit);
+}
+
+.df-required {
+  color: var(--p-red-500, #e24c4c);
+}
+
+.df-helper-text {
+  color: var(--color-neutral-500);
+  font-size: 0.8em;
+}
+
+.df-field-error.p-inline-message {
+  width: fit-content;
+  background: transparent;
+  border: 0;
+  padding: 0;
+}
+
+.df-field-error.p-inline-message .p-inline-message-text {
+  font-size: 0.8em;
+}
+
+.df-view-value {
+  padding: 0.4rem 0;
+  font-size: 0.95em;
+}
+
+.df-view-empty {
+  color: var(--color-neutral-500);
+  font-style: italic;
+}
+
+.df-radio-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.25rem;
+}
+
+.df-radio-option {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+}
+
+.df-slider-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.df-slider-wrap .p-slider {
+  flex: 1;
+}
+
+.df-slider-value {
+  min-width: 2.5rem;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  font-size: 0.85em;
+}
+
+.df-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  padding-top: 0.5rem;
+}
+
+/* PrimeReact's MultiSelect label doesn't carry the `.p-inputtext` class, so it's not
+   covered by the theme's `.p-inputtext-sm .p-inputtext` size rule — size it directly.
+   The size class lands on the `.p-multiselect` root itself (same element, not an
+   ancestor), so these must use the same-element combinator, not a descendant selector. */
+.p-multiselect.p-inputtext-sm .p-multiselect-label {
+  font-size: var(--control-size-sm-font);
+  padding: var(--control-size-sm-input-padding) var(--control-size-sm-input-padding);
+}
+
+.p-multiselect.p-inputtext-lg .p-multiselect-label {
+  font-size: var(--control-size-lg-font);
+  padding: var(--control-size-lg-input-padding) var(--control-size-lg-input-padding);
+}
+
+.p-multiselect.p-inputtext-md .p-multiselect-label {
+  font-size: var(--control-size-md-font);
+  padding: var(--control-size-md-input-padding) var(--control-size-md-input-padding);
+}
+
+/* Dropdown's label DOES carry the bare `.p-inputtext` class (unlike MultiSelect's), so it
+   picks up the small-by-default coopted base rule — but that rule only ever targets the base
+   selector, never the size-suffixed marker classes, so -md/-lg never reached it: the label
+   stayed small-sized no matter what size the Dropdown itself was set to. Same same-element
+   combinator issue as MultiSelect above (the marker lands on `.p-dropdown`, not an ancestor). */
+.p-dropdown.p-inputtext-sm .p-dropdown-label {
+  font-size: var(--control-size-sm-font);
+  padding-top: var(--control-size-sm-input-padding);
+  padding-bottom: var(--control-size-sm-input-padding);
+  padding-left: var(--control-size-sm-input-padding);
+}
+
+.p-dropdown.p-inputtext-md .p-dropdown-label {
+  font-size: var(--control-size-md-font);
+  padding-top: var(--control-size-md-input-padding);
+  padding-bottom: var(--control-size-md-input-padding);
+  padding-left: var(--control-size-md-input-padding);
+}
+
+.p-dropdown.p-inputtext-lg .p-dropdown-label {
+  font-size: var(--control-size-lg-font);
+  padding-top: var(--control-size-lg-input-padding);
+  padding-bottom: var(--control-size-lg-input-padding);
+  padding-left: var(--control-size-lg-input-padding);
+}
+
+.p-inputtext-sm .p-dropdown-trigger,
+.p-inputtext-sm .p-multiselect-trigger {
+  width: var(--control-size-sm-trigger-width);
+}
+
+.p-inputtext-md .p-dropdown-trigger,
+.p-inputtext-md .p-multiselect-trigger {
+  width: var(--control-size-md-trigger-width);
+}
+
+.p-inputtext-lg .p-dropdown-trigger,
+.p-inputtext-lg .p-multiselect-trigger {
+  width: var(--control-size-lg-trigger-width);
+}
+
+/* Calendar's popup-toggle button is a full Button component (bigger default padding than the
+   plain-div triggers Dropdown/MultiSelect use), and it sits as a flex sibling of the <input>
+   inside `.p-calendar` (display:flex, align-items:stretch by default). The <input> must be left
+   alone to size itself the same padding-driven way plain text inputs and Dropdown do (so a
+   Calendar field lines up with its neighbors in the same row) — pinning it to a separately
+   guessed "control height" token previously made it mismatch its own row. Instead, zero out the
+   trigger's own padding/line-height (its only source of extra height) and let flex stretch do
+   the matching: the button naturally fills exactly however tall the input turns out to be. */
+.p-calendar .p-datepicker-trigger {
+  height: 100%;
+  padding: 0;
+  line-height: 1;
+}
+
+.p-calendar.p-inputtext-sm .p-datepicker-trigger {
+  width: var(--control-size-sm-trigger-width);
+}
+
+.p-calendar.p-inputtext-md .p-datepicker-trigger {
+  width: var(--control-size-md-trigger-width);
+}
+
+.p-calendar.p-inputtext-lg .p-datepicker-trigger {
+  width: var(--control-size-lg-trigger-width);
+}
+
+/* Calendar's popup day-grid (`.p-datepicker`, portaled to body) has no native size variant at
+   all — left alone it always renders at one fixed size regardless of the field's control size.
+   Reached via `panelClassName={sizeClass}` on the Calendar component. Medium needs no override
+   here since these values *are* the theme's native defaults. */
+.p-datepicker.p-inputtext-sm .p-datepicker-header,
+.p-datepicker.p-inputtext-sm table th,
+.p-datepicker.p-inputtext-sm table td {
+  padding: var(--control-size-sm-datepicker-padding);
+}
+
+.p-datepicker.p-inputtext-sm .p-datepicker-header .p-datepicker-prev,
+.p-datepicker.p-inputtext-sm .p-datepicker-header .p-datepicker-next {
+  width: var(--control-size-sm-datepicker-nav);
+  height: var(--control-size-sm-datepicker-nav);
+}
+
+.p-datepicker.p-inputtext-sm .p-datepicker-header .p-datepicker-title {
+  line-height: var(--control-size-sm-datepicker-nav);
+  font-size: var(--control-size-sm-font);
+}
+
+.p-datepicker.p-inputtext-sm table {
+  font-size: var(--control-size-sm-font);
+}
+
+.p-datepicker.p-inputtext-sm table th > span,
+.p-datepicker.p-inputtext-sm table td > span {
+  width: var(--control-size-sm-datepicker-cell);
+  height: var(--control-size-sm-datepicker-cell);
+}
+
+.p-datepicker.p-inputtext-lg .p-datepicker-header,
+.p-datepicker.p-inputtext-lg table th,
+.p-datepicker.p-inputtext-lg table td {
+  padding: var(--control-size-lg-datepicker-padding);
+}
+
+.p-datepicker.p-inputtext-lg .p-datepicker-header .p-datepicker-prev,
+.p-datepicker.p-inputtext-lg .p-datepicker-header .p-datepicker-next {
+  width: var(--control-size-lg-datepicker-nav);
+  height: var(--control-size-lg-datepicker-nav);
+}
+
+.p-datepicker.p-inputtext-lg .p-datepicker-header .p-datepicker-title {
+  line-height: var(--control-size-lg-datepicker-nav);
+  font-size: var(--control-size-lg-font);
+}
+
+.p-datepicker.p-inputtext-lg table {
+  font-size: var(--control-size-lg-font);
+}
+
+.p-datepicker.p-inputtext-lg table th > span,
+.p-datepicker.p-inputtext-lg table td > span {
+  width: var(--control-size-lg-datepicker-cell);
+  height: var(--control-size-lg-datepicker-cell);
+}
+
+/* InputSwitch has no size variant of its own — explicit small/large here override the
+   theme's global small default (dynamicForm.css loads unlayered, so it always wins over
+   that layered default regardless of specificity). */
+.p-inputswitch.p-inputtext-sm {
+  width: var(--control-size-sm-switch-width);
+  height: var(--control-size-sm-switch-height);
+}
+
+.p-inputswitch.p-inputtext-sm .p-inputswitch-slider:before {
+  width: var(--control-size-sm-switch-knob);
+  height: var(--control-size-sm-switch-knob);
+  left: var(--control-size-sm-switch-knob-offset);
+  margin-top: var(--control-size-sm-switch-knob-margin-top);
+}
+
+.p-inputswitch.p-inputtext-sm.p-highlight .p-inputswitch-slider:before {
+  transform: translateX(var(--control-size-sm-switch-translate));
+}
+
+.p-inputswitch.p-inputtext-md {
+  width: var(--control-size-md-switch-width);
+  height: var(--control-size-md-switch-height);
+}
+
+.p-inputswitch.p-inputtext-md .p-inputswitch-slider:before {
+  width: var(--control-size-md-switch-knob);
+  height: var(--control-size-md-switch-knob);
+  left: var(--control-size-md-switch-knob-offset);
+  margin-top: var(--control-size-md-switch-knob-margin-top);
+}
+
+.p-inputswitch.p-inputtext-md.p-highlight .p-inputswitch-slider:before {
+  transform: translateX(var(--control-size-md-switch-translate));
+}
+
+.p-inputswitch.p-inputtext-lg {
+  width: var(--control-size-lg-switch-width);
+  height: var(--control-size-lg-switch-height);
+}
+
+.p-inputswitch.p-inputtext-lg .p-inputswitch-slider:before {
+  width: var(--control-size-lg-switch-knob);
+  height: var(--control-size-lg-switch-knob);
+  left: var(--control-size-lg-switch-knob-offset);
+  margin-top: var(--control-size-lg-switch-knob-margin-top);
+}
+
+.p-inputswitch.p-inputtext-lg.p-highlight .p-inputswitch-slider:before {
+  transform: translateX(var(--control-size-lg-switch-translate));
+}

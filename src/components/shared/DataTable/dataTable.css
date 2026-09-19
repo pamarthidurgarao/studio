@@ -1,0 +1,201 @@
+.dt-shared-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.dt-toolbar {
+  padding: 0.5rem 0.75rem;
+}
+
+.dt-toolbar-start {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.dt-title {
+  font-weight: 600;
+  margin-right: 0.5rem;
+}
+
+.dt-global-search {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.dt-global-search > .pi-search {
+  position: absolute;
+  left: 0.65rem;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: var(--color-neutral-500);
+  font-size: 0.85rem;
+}
+
+.dt-global-search > .p-inputtext {
+  padding-left: 2rem;
+}
+
+.dt-row-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+}
+
+.dt-field-filter {
+  width: 100%;
+}
+
+.dt-dense .p-datatable-thead > tr > th,
+.dt-dense .p-datatable-tbody > tr > td {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
+.dt-clickable-rows .p-datatable-tbody > tr {
+  cursor: pointer;
+}
+
+.dt-shared-wrapper[style*='--dt-row-odd-bg'] .p-datatable-tbody > tr:nth-child(odd) {
+  background: var(--dt-row-odd-bg);
+}
+
+.dt-shared-wrapper[style*='--dt-row-even-bg'] .p-datatable-tbody > tr:nth-child(even) {
+  background: var(--dt-row-even-bg);
+}
+
+/* PrimeReact frozen cells use `background: inherit`, which only works when every
+   row already has an opaque background. Un-striped/default rows are transparent,
+   so a frozen column lets the columns scrolling underneath show through it. Force
+   an explicit, opaque background on every frozen cell so it never looks glassy. */
+.dt-shared-wrapper .p-datatable-thead > tr > th.p-frozen-column {
+  background: var(--color-surface, #fff);
+}
+
+.dt-shared-wrapper .p-datatable-tbody > tr > td.p-frozen-column {
+  background: var(--dt-row-odd-bg, var(--color-surface, #fff));
+}
+
+.dt-shared-wrapper .p-datatable-tbody > tr:nth-child(even) > td.p-frozen-column {
+  background: var(--dt-row-even-bg, var(--color-surface, #fff));
+}
+
+.dt-shared-wrapper .p-datatable-tbody > tr.p-highlight > td.p-frozen-column {
+  background: var(--color-accent-800, #e7e5fe);
+}
+
+.dt-cell {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.dt-cell-clickable {
+  cursor: pointer;
+  color: var(--color-accent);
+}
+
+.dt-cell-clickable:hover {
+  text-decoration: underline;
+}
+
+.dt-cell-icon-prefix,
+.dt-cell-icon-suffix {
+  font-size: 0.85em;
+  opacity: 0.75;
+}
+
+.dt-cell-highlight {
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-sm, 4px);
+  background: color-mix(in srgb, var(--color-accent) 16%, transparent);
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+/* PrimeReact's size classes only resize input text/padding, not the dropdown
+   trigger button or paginator nav buttons — bring those in line too. Values
+   come from the theme's --control-size-* tokens (theme.css), not hardcoded here. */
+.dt-shared-wrapper .p-inputtext-sm .p-dropdown-trigger {
+  width: var(--control-size-sm-trigger-width);
+}
+
+.dt-shared-wrapper .p-inputtext-md .p-dropdown-trigger {
+  width: var(--control-size-md-trigger-width);
+}
+
+.dt-shared-wrapper .p-inputtext-lg .p-dropdown-trigger {
+  width: var(--control-size-lg-trigger-width);
+}
+
+.dt-shared-wrapper .p-paginator.p-inputtext-sm {
+  padding: 0.25rem;
+}
+
+.dt-shared-wrapper .p-paginator.p-inputtext-sm .p-dropdown {
+  height: var(--control-size-sm-control-height);
+}
+
+.dt-shared-wrapper .p-paginator.p-inputtext-sm .p-dropdown-label {
+  height: var(--control-size-sm-control-height);
+  padding-top: 0;
+  padding-bottom: 0;
+  display: flex;
+  align-items: center;
+}
+
+.dt-shared-wrapper .p-paginator.p-inputtext-sm .p-dropdown-trigger {
+  height: var(--control-size-sm-control-height);
+}
+
+.dt-shared-wrapper .p-paginator.p-inputtext-sm .p-paginator-first,
+.dt-shared-wrapper .p-paginator.p-inputtext-sm .p-paginator-prev,
+.dt-shared-wrapper .p-paginator.p-inputtext-sm .p-paginator-next,
+.dt-shared-wrapper .p-paginator.p-inputtext-sm .p-paginator-last,
+.dt-shared-wrapper .p-paginator.p-inputtext-sm .p-paginator-page {
+  min-width: var(--control-size-sm-paginator-btn);
+  height: var(--control-size-sm-paginator-btn);
+  font-size: var(--control-size-sm-font);
+}
+
+.dt-shared-wrapper .p-paginator.p-inputtext-md .p-dropdown {
+  height: var(--control-size-md-control-height);
+}
+
+.dt-shared-wrapper .p-paginator.p-inputtext-md .p-dropdown-label {
+  height: var(--control-size-md-control-height);
+  padding-top: 0;
+  padding-bottom: 0;
+  display: flex;
+  align-items: center;
+}
+
+.dt-shared-wrapper .p-paginator.p-inputtext-md .p-dropdown-trigger {
+  height: var(--control-size-md-control-height);
+}
+
+.dt-shared-wrapper .p-paginator.p-inputtext-md .p-paginator-first,
+.dt-shared-wrapper .p-paginator.p-inputtext-md .p-paginator-prev,
+.dt-shared-wrapper .p-paginator.p-inputtext-md .p-paginator-next,
+.dt-shared-wrapper .p-paginator.p-inputtext-md .p-paginator-last,
+.dt-shared-wrapper .p-paginator.p-inputtext-md .p-paginator-page {
+  min-width: var(--control-size-md-paginator-btn);
+  height: var(--control-size-md-paginator-btn);
+  font-size: var(--control-size-md-font);
+}
+
+.dt-shared-wrapper .p-paginator.p-inputtext-lg .p-paginator-first,
+.dt-shared-wrapper .p-paginator.p-inputtext-lg .p-paginator-prev,
+.dt-shared-wrapper .p-paginator.p-inputtext-lg .p-paginator-next,
+.dt-shared-wrapper .p-paginator.p-inputtext-lg .p-paginator-last,
+.dt-shared-wrapper .p-paginator.p-inputtext-lg .p-paginator-page {
+  min-width: var(--control-size-lg-paginator-btn);
+  height: var(--control-size-lg-paginator-btn);
+  font-size: var(--control-size-lg-font);
+}

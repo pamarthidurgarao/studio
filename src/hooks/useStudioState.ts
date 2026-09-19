@@ -1,4 +1,4 @@
-import { useMemo, useState, type CSSProperties } from 'react';
+import { useMemo, useRef, useState, type CSSProperties } from 'react';
 import type { Breakpoint, LayoutMode, Padding, SidebarTab } from '../types';
 import { layers } from '../data/studioData';
 
@@ -25,7 +25,7 @@ const LAYER_TAG: Record<string, string> = {
 };
 
 export function useStudioState() {
-  const [tab, setTab] = useState<SidebarTab>('blocks');
+  const [tab, setTab] = useState<SidebarTab>('pages');
   const [bp, setBp] = useState<Breakpoint>('desktop');
   const [mode, setMode] = useState<LayoutMode>('grid');
   const [selectedLayer, setSelectedLayer] = useState<string>('cards');
@@ -36,6 +36,12 @@ export function useStudioState() {
   const [search, setSearch] = useState('');
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [panelOpen, setPanelOpen] = useState(false);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [propertiesCollapsed, setPropertiesCollapsed] = useState(false);
+  /** Attached by CanvasArea to the element wrapping the actual bound component (DataTable /
+   * DynamicForm / StepperForm) — the Layers tab walks this real DOM subtree instead of showing
+   * fake mock data, so it always reflects whatever is actually rendered. */
+  const canvasRef = useRef<HTMLDivElement>(null);
 
   const breakpoints = useMemo(
     () => BREAKPOINTS.map((b) => ({ ...b, active: b.key === bp })),
@@ -107,6 +113,8 @@ export function useStudioState() {
 
   const toggleSidebar = () => setSidebarOpen((v) => !v);
   const togglePanel = () => setPanelOpen((v) => !v);
+  const toggleSidebarCollapsed = () => setSidebarCollapsed((v) => !v);
+  const togglePropertiesCollapsed = () => setPropertiesCollapsed((v) => !v);
   const closeDrawers = () => {
     setSidebarOpen(false);
     setPanelOpen(false);
@@ -139,8 +147,13 @@ export function useStudioState() {
     setSearch,
     sidebarOpen,
     panelOpen,
+    sidebarCollapsed,
+    propertiesCollapsed,
+    canvasRef,
     toggleSidebar,
     togglePanel,
+    toggleSidebarCollapsed,
+    togglePropertiesCollapsed,
     closeDrawers,
     selectLayer,
     breakpoints,
